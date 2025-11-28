@@ -1,0 +1,31 @@
+NAME : 'deeplabv3plus_bcos_clip_name'
+WANDB_LOG : True
+MAX_EPOCHS : 60
+FREEZE_ENCODER :  True
+MODEL_TYPE : 'deeplabv3plus_contrastive'
+MODEL_FROM_FILE : 'deeplabv3plus_bcos_clip_name/model_last.pth'
+
+FLAIR :
+  SPLIT : '/base'  # either dev, or base
+  TRAIN_PATCH_SIZE : 512
+  TEST_PATCH_SIZE  : 512
+
+TLM : 
+  EMBEDDING_PATH : 'data/tlm_labels/tlm_labels_clip.pt'
+
+train : 
+  batch_size : 8
+  optimizer_type : 'adam'
+  scheduler_type : 'stepLR'
+  lr : 1e-4
+  contrastive : [{
+    'embedding_path':'data/flair_labels/flair_word_clip.pt',
+    'temperature':1.5,
+    'bcos_value':1.5,
+    'embedding_size':512,
+    'ignore_index':0,
+    'augmented_path' :'',
+    'use_augmentation':False,
+    'nb_pos_vectors':0,
+    'nb_neg_vectors':0,
+                }]
