@@ -12,11 +12,11 @@ Les deux csv FLAIR et FLAIR-HUB possédant des formats différents nous avons ad
 - ajouts et modifications des lignes 96 à 100 dans la fonction \_\_getitem__
 
 <h2>Chemins</h2>
-Les chemins sont à changer dans le fichier default.py et les fichiers cfg.json.
+Les chemins sont à changer dans le fichier default.py.
 Si utilisation de CLIPSeg, il faut aussi changer les chemins dans ce répertoire-là
 
 <h2>Problèmes de drivers</h2>
-Modifier dans default.py -> ligne 69
+Modifier dans default.py ligne 79
 
 <h2>Problèmes de fichiers innexistants</h2>
 De nombreux fichiers ne semblaient pas coincidé avec les noms des fichiers lu dans le code: voici une liste des modifications de noms de fichiers apportés:
@@ -52,17 +52,3 @@ python main.py --cfg <config_name>
 <h3>Lancement du projet</h3>
 Il est possible de lancer les tests sans anaconda ni docker (bien que l'utilisation de l'un des deux soit conseillée). Pour cela, une commande bash a été ajouté pour l'import des librairies python : req.sh
 
-//
-
-// 
-
-Essayer les parties test sans entrainement
-Envoyer et fork le projet
-+ relire la doc de Valerie Zermatten
-+ demander à hangouet sa "bonne description/analyse d'une image"
-urbain, campagne, montagne, côte
-
-+ en fonction taille image
-+ voir recherche reproductible
-
-doc GDAL -> GDAL / raster / select
