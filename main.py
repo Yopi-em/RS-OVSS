@@ -260,7 +260,7 @@ def run_test (cfg) :
     model = u.load_model(model_type = cfg.MODEL_TYPE, n_class = cfg.FLAIR.N_CLASS , 
                          embedding_size = cfg.train.contrastive[0]['embedding_size'] if 'contrastive' in cfg.MODEL_TYPE else 0
                          )
-    weights = torch.load(cfg.output_dir + '/model_best.pth')
+    weights = torch.load(cfg.output_dir + '/model_best.pth', map_location = device)
     model.load_state_dict(weights, strict=True)
     print('loaded weights from ',cfg.output_dir + '/model_best.pth')
     model.eval()
@@ -378,7 +378,51 @@ def launch_training(cfg) -> None:
     print('-'*40,'END TRAINING',args.cfg,'-'*40) 
 
 
+def config(cfg):
+    # General experiment setup :
+    global device    
+    nbr_epochs = cfg.MAX_EPOCHS 
+    date = datetime.now().strftime("%d-%m-%Y_%H-%M")
+    output_dir = cfg.RESULTS_PATH +'/' +cfg.NAME #+date
+    Path(output_dir).mkdir(parents=True, exist_ok=True)
+    cfg.output_dir = output_dir
+    
+    # save config to json file :
+    with open(  output_dir+"/cfg.json", "w") as file:
+        json.dump(dict(cfg), file,indent =4)
 
+    
+    # Dataset Set-up
+    train_dataset = FLAIRDataset(config=cfg, phase='train')    
+    val_dataset   = FLAIRDataset(config=cfg, phase='val')
+    train_dataloader = DataLoader(train_dataset, batch_size=cfg.train.batch_size, shuffle=True, num_workers=cfg.train.num_workers  )
+    train_dataloader.dataset.sample_id_list()
+    val_dataloader = DataLoader(val_dataset, batch_size=cfg.train.batch_size, shuffle=False, num_workers=cfg.train.num_workers)
+
+    
+    # Model & Optimizer & Loss Set-up   
+    model = u.load_model (model_type = cfg.MODEL_TYPE,
+                          n_class =cfg.FLAIR.N_CLASS , 
+                          from_file = cfg.DIR_PATH +'output/' + cfg.MODEL_FROM_FILE,
+                          freeze_encoder = cfg.FREEZE_ENCODER,
+                          embedding_size = cfg.train.contrastive[0]['embedding_size'] if 'contrastive' in cfg.MODEL_TYPE else 0
+                          )
+    model.to(device)
+    optimizer = u.optimizer_factory(cfg.train.optimizer_type, model,lr=cfg.train.lr)
+    scheduler = u.scheduler_factory(cfg.train.scheduler_type, optimizer, max_epochs = nbr_epochs   )
+    
+    if 'contrastive' not in cfg.MODEL_TYPE :
+        criterion = CELoss(ignore_index=0)
+    else : 
+        contrastive_cfg = cfg.train.contrastive[0]
+        contrastive_cfg['device']=device
+        contrastive_cfg['n_class'] = cfg.FLAIR.N_CLASS   
+        contrastive_cfg['augmented_path'] = cfg.DIR_PATH + contrastive_cfg['augmented_path'] 
+        contrastive_cfg['embedding_path'] = cfg.DIR_PATH + contrastive_cfg['embedding_path'] 
+        contrastive_cfg['device']
+        criterion = WrapperBcosLossWAugm(**contrastive_cfg
+                                    )
+    
 
 if __name__ == '__main__':
     args = parse_args()    
@@ -388,7 +432,8 @@ if __name__ == '__main__':
 
             
     print('-'*40,'Launch experiment',args.cfg, '-'*40)
-    launch_training(cfg)
+    #launch_training(cfg)
+    config(cfg)
     run_test(cfg)
     run_test_on_TLM(cfg)
     print('\n\n','*'*40,' SUCCESSFUL RUN FOR',args.cfg,'*'*40,'\n\n',) 
