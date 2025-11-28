@@ -2,10 +2,13 @@ import torch.nn as nn
 import torch
 import torch.nn.functional as F
 import os
-
 from torchvision.models._utils import IntermediateLayerGetter
 from torchvision.models.segmentation.deeplabv3 import ASPP
 from torchvision.models import resnet
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+
 
 #######################################################################
 # Deeplabv3plus implementation from https://github.com/VainF/DeepLabV3Plus-Pytorch.git
@@ -103,7 +106,7 @@ class ContrastiveDeepLabv3plus(DeepLabv3plus):
         self.embedding_size =embedding_size
         
         if os.path.exists(from_file) and not os.path.isdir(from_file) and from_file is not None :
-            weights = torch.load(from_file)
+            weights = torch.load(from_file, map_location=device)
             mis_keys, un_keys = self.load_state_dict(weights['model_state_dict'], strict=True)
             assert len(mis_keys) == 0 and len(un_keys) == 0, "Missing or unexpected keys when loading pretrained encoder weights from file"
             print( f'Model weights sucessfully loaded from {from_file}')

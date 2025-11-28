@@ -5,6 +5,10 @@ import os
 from collections import OrderedDict
 logging.set_verbosity(logging.CRITICAL )
 
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+
 def my_init_weights(modules):
     """Initialize the weights"""
     for module in modules:
@@ -29,7 +33,7 @@ class ContrastiveSegformer (nn.Module):
         model = SegformerForSemanticSegmentation.from_pretrained("nvidia/mit-b0",num_labels = 13)
 
         if os.path.exists(from_pretrained) :
-            weights = torch.load(from_pretrained)            
+            weights = torch.load(from_pretrained, map_location=device)            
             mis_keys, un_keys = model.load_state_dict(weights, strict=False)
             assert len(mis_keys) == 0 and len(un_keys) == 0, "Missing or unexpected keys when loading pretrained weights"
             print ( '\tEncoder Segformer weights sucessfully loaded from', from_pretrained)
