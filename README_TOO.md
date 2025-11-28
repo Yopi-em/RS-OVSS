@@ -18,6 +18,14 @@ Si utilisation de CLIPSeg, il faut aussi changer les chemins dans ce répertoire
 <h2>Problèmes de drivers</h2>
 Modifier dans default.py ligne 79
 
+<h2>Problèmes de CPU avec Torch</h2>
+Pour assurer la compatibilité du code avec des environnement "cpu-only", quelques modifications ont été apportés dans les fichiers suivants:
+
+- main.py : ligne 263 
+- SegformerModel.py : lignes 9 et 36
+- DeepLabv3pModel.py : lignes 9 et 109 
+
+
 <h2>Problèmes de fichiers innexistants</h2>
 De nombreux fichiers ne semblaient pas coincidé avec les noms des fichiers lu dans le code: voici une liste des modifications de noms de fichiers apportés:
 
@@ -38,7 +46,8 @@ python3 main.py --cfg segformer_bcos_sbert_des_eda
 python3 main.py --cfg dlv-bcos_clip_name
 
 ```
-
+<h2>Tests sans entraînement</h2>
+Pour lancer des tests sans entraînements, une fonction config a été ajouté au fichier main.py
 
 <h2>Rappels utiles</h2>
 <h3>Commandes</h3>
