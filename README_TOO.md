@@ -16,7 +16,7 @@ Les chemins sont à changer dans le fichier default.py.
 Si utilisation de CLIPSeg, il faut aussi changer les chemins dans ce répertoire-là
 
 <h2>Problèmes de drivers</h2>
-Modifier dans default.py ligne 79
+Afin de régler ce problème, il suffit de modifier dans default.py la ligne 79
 
 <h2>Problèmes de CPU avec Torch</h2>
 Pour assurer la compatibilité du code avec des environnement "cpu-only", quelques modifications ont été apportés dans les fichiers suivants:
