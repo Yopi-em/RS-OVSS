@@ -22,17 +22,7 @@ Modifier dans default.py -> ligne 69
 De nombreux fichiers ne semblaient pas coincidé avec les noms des fichiers lu dans le code: voici une liste des modifications de noms de fichiers apportés:
 
 - ajout des fichiers dlv-bcos_clip_des.yaml, dlv-bcos_clip_name.yaml et dlv-bcos_clip_syn.yaml afin de pouvoir effectuer les tests proposés dans le README.md du projet initial.
-- 
-
-<h2>Rappels utiles</h2>
-<h3>Commandes</h3>
-Il est possible de choisir soit même les configurations que l'on souhaite tester et entrainer avec la commande:
-
-```
-python main.py --cfg <config_name>
-```
-
-Néanmoins, voici les tests proposés dans le README.md du projet initial:
+- certains noms de fichiers ne correspondent également pas à ceux appelés dans des fichiers ou aux commandes partagées dans le readme. Les bonnes commandes sont les suivantes:
 
 ```
 # Train Segformer baseline model :
@@ -42,12 +32,22 @@ python3 main.py --cfg segformer-base
 python3 main.py --cfg dlv-base
 
 # Train TACOSS with the SegFormer visual backbone and the SentenceBERT text encoder : 
-python3 main.py --cfg segformer_bcos_sbert_des_eda # Pb de CPU 
+python3 main.py --cfg segformer_bcos_sbert_des_eda 
 
 # Train TACOSS with the DeepLabv3+ backbone and CLIP text encoder :
-python3 main.py --cfg dlv-bcos_clip_name # N'existe pas/plus
+python3 main.py --cfg dlv-bcos_clip_name
 
 ```
+
+
+<h2>Rappels utiles</h2>
+<h3>Commandes</h3>
+Il est possible de choisir soit même les configurations que l'on souhaite tester et entrainer avec la commande:
+
+```
+python main.py --cfg <config_name>
+```
+
 
 <h3>Lancement du projet</h3>
 Il est possible de lancer les tests sans anaconda ni docker (bien que l'utilisation de l'un des deux soit conseillée). Pour cela, une commande bash a été ajouté pour l'import des librairies python : req.sh
