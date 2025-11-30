@@ -1,6 +1,6 @@
 <h1 style="text-align: center;"> Modifications apportées, problèmes rencontrés</h1>
 <h2>Disclaimer</h2>
-Ce projet à pour but de corriger et de reprendre les travaux de Valérie Zermatten afin de les adaptés au nouveau jeu de données FLAIR-HUB de l'IGN. Les modifications sont classés par types de modification et/ou problèmes rencontrés au fur et à mesure.
+Ce projet a pour but de corriger et de reprendre les travaux de Valérie Zermatten afin de les adapter au nouveau jeu de données FLAIR-HUB de l'IGN. Les modifications sont classées par types de modification et/ou problèmes rencontrés au fur et à mesure.
 
 Vous trouverez ci-dessous la liste des modifications apportées au dépot git original : [RS-OVSS](https://github.com/eceo-epfl/RS-OVSS)
 
@@ -11,7 +11,7 @@ Les deux csv FLAIR et FLAIR-HUB possédant des formats différents nous avons ad
 - ajout de la ligne 29 dans la fonction \_\_init__
 - ajouts et modifications des lignes 96 à 100 dans la fonction \_\_getitem__
 
-(les tests ont pour l'instant été éffectués sur les données FLAIR-HUB TOY)
+(les tests ont pour l'instant été éffectué sur les données FLAIR-HUB TOY)
 
 Les données sont à télécharger sur [cette page](https://ignf.github.io/FLAIR/FLAIR-HUB/flairhub_fr.html).
 
@@ -31,7 +31,7 @@ Pour assurer la compatibilité du code avec des environnement "cpu-only", quelqu
 
 
 <h2>Problèmes de fichiers innexistants</h2>
-De nombreux fichiers ne semblaient pas coincidé avec les noms des fichiers lu dans le code: voici une liste des modifications de noms de fichiers apportés:
+De nombreux fichiers ne semblaient pas coincider avec les noms des fichiers lu dans le code: voici une liste des modifications de noms de fichiers apportés:
 
 - ajout des fichiers dlv-bcos_clip_des.yaml, dlv-bcos_clip_name.yaml et dlv-bcos_clip_syn.yaml afin de pouvoir effectuer les tests proposés dans le README.md du projet initial.
 - certains noms de fichiers ne correspondent également pas à ceux appelés dans des fichiers ou aux commandes partagées dans le readme. Les bonnes commandes sont les suivantes:
@@ -51,7 +51,7 @@ python3 main.py --cfg dlv-bcos_clip_name
 
 ```
 <h2>Tests sans entraînement</h2>
-Pour lancer des tests sans entraînements, une fonction config a été ajouté au fichier main.py
+Pour lancer des tests sans entraînement, une fonction config a été ajouté au fichier main.py
 
 <h2>Rappels utiles</h2>
 <h3>Commandes</h3>
