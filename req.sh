@@ -127,4 +127,4 @@ pip3 install webcolors==24.6.0 --break-system-packages
 pip3 install webencodings==0.5.1 --break-system-packages 
 pip3 install websocket-client==1.8.0 --break-system-packages 
 pip3 install widgetsnbextension==4.0.11 --break-system-packages 
-pip3 install yacs==0.1.8
+pip3 install yacs==0.1.8 --break-system-packages

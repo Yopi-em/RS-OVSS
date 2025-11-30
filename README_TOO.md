@@ -5,11 +5,15 @@ Ce projet à pour but de corriger et de reprendre les travaux de Valérie Zermat
 Vous trouverez ci-dessous la liste des modifications apportées au dépot git original : [RS-OVSS](https://github.com/eceo-epfl/RS-OVSS)
 
 <h2>Données ajoutées</h2>
-<h3>Données FLAIR-HUB TOY: test sur les données TOY</h3>
-Les deux csv FLAIR et FLAIR-HUB possédant des formats différents nous avons adapter le code en conséquence dans la classe FLAIRDataset du fichier dataset.py:
+<h3>Données FLAIR-HUB</h3>
+Les deux csv FLAIR et FLAIR-HUB possédant des formats différents nous avons adapté le code en conséquence dans la classe FLAIRDataset du fichier dataset.py:
 
 - ajout de la ligne 29 dans la fonction \_\_init__
 - ajouts et modifications des lignes 96 à 100 dans la fonction \_\_getitem__
+
+(les tests ont pour l'instant été éffectués sur les données FLAIR-HUB TOY)
+
+Les données sont à télécharger sur [cette page](https://ignf.github.io/FLAIR/FLAIR-HUB/flairhub_fr.html).
 
 <h2>Chemins</h2>
 Les chemins sont à changer dans le fichier default.py.
